@@ -1,2 +1,2 @@
 # e-commerceProject
-Um projeto de uma e-commerce em java.
+Um projeto de um e-commerce em java.
