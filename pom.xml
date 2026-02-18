@@ -21,6 +21,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>br.com.caelum.stella</groupId>
+            <artifactId>caelum-stella-core</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
         <!-- JUnit 5 completo (API + Engine + Params) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

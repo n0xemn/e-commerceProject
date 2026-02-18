@@ -1,1 +1,5 @@
 com\leo\App.class
+com\leo\aplicacao\controler\ClienteControler.class
+com\leo\aplicacao\service\ClienteService.class
+com\leo\dominio\model\Cliente.class
+com\leo\dominio\repository\ClientesRepository.class
