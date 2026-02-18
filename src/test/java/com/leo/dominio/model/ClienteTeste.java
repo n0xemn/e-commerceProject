@@ -2,7 +2,6 @@ package com.leo.dominio.model;
 
 import org.junit.jupiter.api.Test;
 
-import com.leo.dominio.model.Cliente;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ClienteTeste { // cada teste tem um metodo
@@ -14,8 +13,8 @@ public class ClienteTeste { // cada teste tem um metodo
 
     @Test
     public void verSeClientesSaoIguais(){
-        Cliente cliente1 = new Cliente("leo", 2, "123", "emailqualquer", "cepqualquer");
-        Cliente cliente2 = new Cliente("leo", 2, "123", "emailqualquer", "cepqualquer");
+        Cliente cliente1 = new Cliente("leo", 2, "12345678901", "emailqualquer", "cepqualquer");
+        Cliente cliente2 = new Cliente("leo", 2, "12345678901", "emailqualquer", "cepqualquer");
 
         assertEquals(cliente1, cliente2);
     }

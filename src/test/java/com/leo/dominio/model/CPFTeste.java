@@ -10,4 +10,9 @@ public class CPFTeste {
         CPF cpf = new CPF("123");
         assertEquals("12345678901", cpf.reformatar("123.456.789-01"));
     }
+
+    @Test
+    public void cpfTem11DigitSeNmandaExcecao(){
+        assertThrows(IllegalArgumentException.class, () -> new CPF("111.111.111-11"));
+    }
 }
