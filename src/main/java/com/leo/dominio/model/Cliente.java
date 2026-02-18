@@ -1,7 +1,7 @@
 package com.leo.dominio.model;
 
 public class Cliente {
-    private CPF cpf; //TODO classe pra email e endereço, criar tipo de cliente, vip e normal
+    private final CPF cpf; //TODO classe pra email e endereço, criar tipo de cliente, vip e normal
     private int idade;
     private String nome;
     private String email;
