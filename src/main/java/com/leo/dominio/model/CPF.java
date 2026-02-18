@@ -1,6 +1,6 @@
 package com.leo.dominio.model;
 
-public class CPF {
+public final class CPF {
     private final String valor;
 
     public CPF(String cpf){
@@ -25,9 +25,16 @@ public class CPF {
         return this.valor.equals(comparar.getValor());
     }
 
-    // TODO hashcode
+    @Override
+    public int hashCode() {
+        return Objects.hash(valor);
+    }
 
     public String getValor() {
         return valor;
+    }
+
+    public String reformatar(String cpf){
+        return cpf.replaceAll("\\D", "");
     }
 }
