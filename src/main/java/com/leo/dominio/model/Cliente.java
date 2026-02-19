@@ -1,13 +1,17 @@
 package com.leo.dominio.model;
 
+import com.leo.dominio.shared.CPF;
+import com.leo.dominio.shared.Email;
+import com.leo.dominio.shared.Endereco;
+
 public class Cliente {
-    private final CPF cpf; //TODO classe pra email e endereço, criar tipo de cliente, vip e normal
+    private final CPF cpf; //TODO classe pra endereço, criar tipo de cliente, vip e normal
     private Email email;
+    private Endereco endereco;
     private int idade;
     private String nome;
-    private String endereco;
 
-    public Cliente(String nome, int idade, String cpf, String email, String endereco) {
+    public Cliente(String nome, int idade, String cpf, String email, Endereco endereco) {
         this.cpf = new CPF(cpf); 
         setIdade(idade);
         setNome(nome);
@@ -15,7 +19,7 @@ public class Cliente {
         setEndereco(endereco);
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         if (endereco == null) {
             throw new IllegalArgumentException("O endereço não pode ser nulo.");
         }
@@ -47,7 +51,7 @@ public class Cliente {
         return email.getValor();
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
@@ -74,6 +78,6 @@ public class Cliente {
         }
 
         Cliente comparar = (Cliente) e;
-        return this.getCpf().equals(comparar.getCpf()) && this.getEmail().equals(comparar.getEmail()) && this.nome.equals(comparar.getNome()) && this.idade == comparar.getIdade();
+        return this.getCpf().equals(comparar.getCpf()) && this.getEmail().equals(comparar.getEmail()) && this.nome.equals(comparar.getNome()) && this.getEndereco().equals(comparar.getEndereco()) &&this.idade == comparar.getIdade();
     }
 }

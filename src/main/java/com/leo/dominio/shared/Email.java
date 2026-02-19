@@ -1,4 +1,4 @@
-package com.leo.dominio.model;
+package com.leo.dominio.shared;
 
 import java.util.Objects;
 
