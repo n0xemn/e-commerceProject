@@ -2,9 +2,9 @@ package com.leo.dominio.model;
 
 public class Cliente {
     private final CPF cpf; //TODO classe pra email e endereço, criar tipo de cliente, vip e normal
+    private Email email;
     private int idade;
     private String nome;
-    private String email;
     private String endereco;
 
     public Cliente(String nome, int idade, String cpf, String email, String endereco) {
@@ -24,11 +24,7 @@ public class Cliente {
     }
 
     public void setEmail(String email) {
-        if (email == null) {
-            throw new IllegalArgumentException("O email não pode ser nulo.");
-        }
-
-        this.email = email;
+        this.email = new Email(email);
     }
 
     public void setIdade(int idade) {
@@ -48,7 +44,7 @@ public class Cliente {
     }
 
     public String getEmail() {
-        return email;
+        return email.getValor();
     }
 
     public String getEndereco() {
@@ -78,6 +74,6 @@ public class Cliente {
         }
 
         Cliente comparar = (Cliente) e;
-        return this.getCpf().equals(comparar.getCpf()) && this.nome.equals(comparar.getNome()) && this.idade == comparar.getIdade();
+        return this.getCpf().equals(comparar.getCpf()) && this.getEmail().equals(comparar.getEmail()) && this.nome.equals(comparar.getNome()) && this.idade == comparar.getIdade();
     }
 }
