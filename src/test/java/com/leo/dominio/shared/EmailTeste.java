@@ -1,6 +1,9 @@
-package com.leo.dominio.model;
+package com.leo.dominio.shared;
 
 import org.junit.jupiter.api.Test;
+
+import com.leo.dominio.shared.Email;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EmailTeste {
