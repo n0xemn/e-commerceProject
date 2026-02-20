@@ -20,6 +20,7 @@ public class Produto {
     }
 
     public void setPreco(String preco) {
+        preco = preco.replace(",", ".");
         BigDecimal valorPraComparacao = new BigDecimal(preco);
 
         if (valorPraComparacao.compareTo(BigDecimal.ZERO) == 0 || valorPraComparacao.compareTo(BigDecimal.ZERO) < 0) {

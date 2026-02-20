@@ -7,7 +7,7 @@ public class ProdutoTeste {
     
     @Test
     public void nomeNaoPodeSerNullLancarExcecao(){
-        assertThrows(IllegalArgumentException.class, () -> new Produto(null, "2"));
+        assertThrows(IllegalArgumentException.class, () -> new Produto(null, "2.55"));
     }
 
     @Test

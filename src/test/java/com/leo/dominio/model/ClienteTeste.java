@@ -1,7 +1,6 @@
 package com.leo.dominio.model;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ClienteTeste { // cada teste tem um metodo
