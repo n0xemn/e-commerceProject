@@ -1,6 +1,6 @@
 package com.leo.dominio.model;
 
-import java.math.BigDecimal;
+import java.math.BigDecimal; // fazer uma classe pra item pedido, assim posso ter mais de um produto igual sem lotar a lista
 
 public class Produto {
     private String nome;
@@ -12,8 +12,8 @@ public class Produto {
     }
 
     public void setNome(String nome) {
-        if (nome == null) {
-            throw new IllegalArgumentException("O nome não pode ser nulo.");
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("O nome não pode ser nulo ou estar em branco.");
         }
 
         this.nome = nome;
@@ -21,10 +21,9 @@ public class Produto {
 
     public void setPreco(String preco) {
         BigDecimal valorPraComparacao = new BigDecimal(preco);
-        BigDecimal valorZero = new BigDecimal(0);
 
-        if (valorPraComparacao.compareTo(valorZero) == 0 || valorPraComparacao.compareTo(valorZero) < 0) {
-            throw new IllegalArgumentException("O preço não pode ser menor ou igual a zero.");    
+        if (valorPraComparacao.compareTo(BigDecimal.ZERO) == 0 || valorPraComparacao.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("O preço tem que ser maior que zero.");    
         }
 
         this.preco = valorPraComparacao;
