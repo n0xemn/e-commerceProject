@@ -3,23 +3,23 @@ package com.leo.dominio.model;
 import java.math.BigDecimal;
 import java.util.List;
 
-// TODO não está finalizado, falta coisa ainda
+import com.leo.dominio.shared.Endereco;
 
 public class Pedido {
     private String titular;
     private List<Produto> produtos;
-    private BigDecimal valorTotal; // usado só quando o pedido é fechado
-    private String endereco; //TODO fazer uma classe pra endereço, 2 casos de uso, um que o endereço é do cliente e o outro quando o endereço é novo
+    private BigDecimal valorTotal;
+    private Endereco endereco; //TODO 2 casos de uso, um que o endereço é do cliente e o outro quando o endereço é novo
     private String estado;
 
-    public Pedido(String titular, String endereco){
+    public Pedido(String titular, Endereco endereco){
         setTitular(titular);
         setEndereco(endereco);
         setEstado("Aberto");
         valorTotal = BigDecimal.ZERO;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         if (endereco == null) {
             throw new IllegalArgumentException("O endereço não pode ser nulo.");
         }
@@ -28,28 +28,31 @@ public class Pedido {
     }
 
     public void setTitular(String titular) {
-        if (titular == null) {
-            throw new IllegalArgumentException("O nome do titular não pode ser nulo.");
+        if (titular == null || titular.isBlank()) {
+            throw new IllegalArgumentException("O nome do titular não pode ser nulo ou estar em branco.");
         }
         
         this.titular = titular;
     }
     
     public void setEstado(String estado){
+        if (estado == null || estado.isBlank()) {
+            throw new IllegalArgumentException("O estado não pode ser nulo ou estar em branco.");
+        }
         this.estado = estado;
     }
 
-    private void setValorTotal(BigDecimal novoValorSoma){
+    private void adicionarValor(BigDecimal novoValorSoma){
         this.valorTotal = valorTotal.add(novoValorSoma);
     }
     
     public void adicionarProduto(Produto novoProduto){ 
         if (novoProduto == null) {
-            throw new IllegalArgumentException("O produto não pode ser null."); // nem sei se da pra passar null nessas ocasioes
+            throw new IllegalArgumentException("O produto não pode ser null.");
         }
 
         produtos.add(novoProduto);
-        setValorTotal(novoProduto.getPreco());
+        adicionarValor(novoProduto.getPreco());
     }
 
     public void finalizarPedido(){ //TODO
@@ -66,9 +69,8 @@ public class Pedido {
 
     public boolean verificarValor(BigDecimal valorTotal) {
         BigDecimal valorPraComparacao = valorTotal;
-        BigDecimal valorZero = new BigDecimal(0);
 
-        if (valorPraComparacao.compareTo(valorZero) == 0 || valorPraComparacao.compareTo(valorZero) < 0) {
+        if (valorPraComparacao.compareTo(BigDecimal.ZERO) == 0 || valorPraComparacao.compareTo(BigDecimal.ZERO) < 0) {
             return false;   
         }
 
