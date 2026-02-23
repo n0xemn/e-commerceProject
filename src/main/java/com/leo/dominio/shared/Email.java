@@ -2,7 +2,7 @@ package com.leo.dominio.shared;
 
 import java.util.Objects;
 
-public class Email {
+public class Email { // record
     private String valor;
 
     public Email(String email){

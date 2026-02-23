@@ -6,7 +6,7 @@ import java.util.Objects;
 import br.com.caelum.stella.validation.CPFValidator;
 import br.com.caelum.stella.validation.InvalidStateException;
 
-public final class CPF {
+public final class CPF { // testar formato do cpf, por exemplo não poder coçocar um cpf 123-123.123.123
     private final String valor;
 
     public CPF(String cpf){
