@@ -111,4 +111,8 @@ public class Pedido {
     public String getEstado(){
         return this.estado.getEstado();
     }
+
+    public void pagar(){
+        
+    }
 }
