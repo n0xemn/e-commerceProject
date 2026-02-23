@@ -7,12 +7,19 @@ public class CPFTeste {
     
     @Test
     public void retornarStringSemPontosEtracos(){
-        CPF cpf = new CPF("123"); // esse teste da errado ma por causa do constructor
+        CPF cpf = new CPF("16231387607"); // use seu cpf pra esse teste dar certo
         assertEquals("12345678901", cpf.reformatar("123.456.789-01"));
     }
 
     @Test
-    public void cpfTem11DigitSeNmandaExcecao(){
-        assertThrows(IllegalArgumentException.class, () -> new CPF("111.111.111-11"));
+    public void cpfTem11DigitSeNmandaFalse(){
+        CPF cpf = new CPF("16231387607"); // use seu cpf pra esse teste dar certo
+        assertTrue(cpf.testarTamanho("12312312312"));
+    }
+
+    @Test
+    public void cpfTemQueSerValidoSeNmandaFalse(){
+        CPF cpf = new CPF("16231387607"); // use seu cpf pra esse teste dar certo
+        assertFalse(cpf.validarCPF("12312312312"));
     }
 }
