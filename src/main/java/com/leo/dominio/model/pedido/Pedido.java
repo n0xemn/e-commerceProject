@@ -13,6 +13,7 @@ public class Pedido {
     private BigDecimal valorTotal;
     private Endereco endereco; //TODO 2 casos de uso, um que o endereço é do cliente e o outro quando o endereço é novo, fazer um metodo remover produto da lista
     private EstadoDoPedido estado; // talvez mude
+    // atbt pagamento
 
     public Pedido(String titular, Endereco endereco){
         setTitular(titular);
@@ -112,7 +113,8 @@ public class Pedido {
         return this.estado.getEstado();
     }
 
-    public void pagar(){
-        
+    // só muda estado?
+    public void pagar(){ // caso de uso pagamento vai cuidar do metodo de pagamento, vai mudar o estado do pedido
+        this.estado.pagar(this);
     }
 }
