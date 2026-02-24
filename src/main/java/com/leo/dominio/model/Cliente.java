@@ -5,7 +5,7 @@ import com.leo.dominio.shared.Email;
 import com.leo.dominio.shared.Endereco;
 
 public class Cliente {
-    private final CPF cpf; //TODO classe pra endereço, criar tipo de cliente, vip e normal
+    private final CPF cpf; //TODO criar tipo de cliente, vip e normal
     private Email email;
     private Endereco endereco;
     private int idade;
