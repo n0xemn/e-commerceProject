@@ -2,10 +2,12 @@ package com.leo.dominio.model;
 
 import java.math.BigDecimal;
 
+import com.leo.dominio.shared.Money;
+
 public class ProdutoPedido {
     private Produto produto;
     private int quantidadePedido;
-    private BigDecimal precoUnitario;
+    private Money precoUnitario; // existe pra ter histórico
 
     public ProdutoPedido(Produto produto, int quantidadePedido){
         setProduto(produto);
@@ -29,7 +31,7 @@ public class ProdutoPedido {
         this.quantidadePedido += quantidadePedido;
     }
 
-    public BigDecimal getPrecoUnitario() {
+    public Money getPrecoUnitario() {
         return precoUnitario;
     }
 
