@@ -1,5 +1,7 @@
 package com.leo.dominio.model;
 
+import java.util.Objects;
+
 import com.leo.dominio.shared.Money;
 
 public class Produto {
@@ -29,5 +31,22 @@ public class Produto {
         return preco;
     }
 
-    //TODO fazer equals
+    @Override
+    public boolean equals(Object e){
+        if(this == e){
+            return true;
+        }
+
+        if (e == null || this.getClass() != e.getClass()) {
+            return false;
+        }
+
+        Produto comparar = (Produto) e;
+        return this.nome.equals(comparar.getNome()) && this.preco.equals(comparar.getPreco());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, preco);
+    }
 }
