@@ -1,7 +1,5 @@
 package com.leo.dominio.model;
 
-import java.math.BigDecimal;
-
 import com.leo.dominio.shared.Money;
 
 public class ProdutoPedido {

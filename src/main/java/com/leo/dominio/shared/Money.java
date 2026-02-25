@@ -40,7 +40,7 @@ public class Money {
         }
     }
 
-    public Money add(Money dinheiro){
+    public Money somar(Money dinheiro){
         mesmaMoeda(dinheiro);
 
         return new Money(this.valor.add(dinheiro.valor), this.moeda);
@@ -52,16 +52,12 @@ public class Money {
         return new Money(this.valor.subtract(dinheiro.valor), this.moeda);
     }
 
-    public Money multiplicar(Money dinheiro){
-        mesmaMoeda(dinheiro);
-
-        return new Money(this.valor.multiply(dinheiro.valor), this.moeda);
+    public Money multiplicar(BigDecimal valor){
+        return new Money(this.valor.multiply(valor), this.moeda);
     }
 
-    public Money dividir(Money dinheiro){
-        mesmaMoeda(dinheiro);
-
-        return new Money(this.valor.divide(dinheiro.valor), this.moeda);
+    public Money dividir(BigDecimal valor){
+        return new Money(this.valor.divide(valor), this.moeda);
     }
 
     public BigDecimal getValor(){

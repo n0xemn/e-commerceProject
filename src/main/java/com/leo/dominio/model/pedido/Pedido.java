@@ -6,11 +6,12 @@ import java.util.List;
 import com.leo.dominio.model.Produto;
 import com.leo.dominio.model.ProdutoPedido;
 import com.leo.dominio.shared.Endereco;
+import com.leo.dominio.shared.Money;
 
 public class Pedido {
     private String titular;
     private List<ProdutoPedido> produtos;
-    private BigDecimal valorTotal;
+    private Money valorTotal;
     private Endereco endereco; //TODO 2 casos de uso, um que o endereço é do cliente e o outro quando o endereço é novo, fazer um metodo remover produto da lista
     private EstadoDoPedido estado; // talvez mude
     // atbt pagamento
@@ -18,8 +19,16 @@ public class Pedido {
     public Pedido(String titular, Endereco endereco){
         setTitular(titular);
         setEndereco(endereco);
-        estado = new EstadoAberto();
-        valorTotal = BigDecimal.ZERO;
+        this.estado = new EstadoAberto();
+        this.valorTotal = new Money("0", definirMoeda(endereco));
+    }
+
+    private String definirMoeda(Endereco endereco){
+        if (endereco.getPais().toUpperCase().equals("BRASIL")) {
+            return "REAL";
+        }
+
+        return "nium";
     }
 
     public void setEndereco(Endereco endereco) {
@@ -38,8 +47,12 @@ public class Pedido {
         this.titular = titular;
     }
 
-    private void atualizarValorTotal(BigDecimal valorCalcular){ 
-        this.valorTotal = valorTotal.add(valorCalcular);
+    private void somarNoValorTotal(Money valorCalcular){ 
+        this.valorTotal = valorTotal.somar(valorCalcular);
+    }
+
+    private void subtrairNoValorTotal(Money valorCalcular){
+        this.valorTotal = valorTotal.subtrair(valorCalcular);
     }
     
     //TODO fazer os testes
@@ -58,8 +71,7 @@ public class Pedido {
             produtos.add(new ProdutoPedido(novoProduto, quantidadePedido));
         }
 
-        BigDecimal novoPreco = novoProduto.getPreco().multiply(new BigDecimal(quantidadePedido)); 
-        atualizarValorTotal(novoPreco);
+        somarNoValorTotal(new Money(novoProduto.getPreco().getValor().multiply(new BigDecimal(quantidadePedido)), novoProduto.getPreco().getMoeda()));
     }
 
     private int acharIndiceDeProdutoIgual(Produto produto){
@@ -84,21 +96,19 @@ public class Pedido {
     }
 
     public void finalizarPedido(){
-        if (! (verificarValor(this.valorTotal))) {
+        if (! (verificarValorTotal())) {
             throw new IllegalArgumentException("O pedido deve ter um valor maior que zero.");
         }
 
         this.estado = new EstadoFechado();
     }    
 
-    public BigDecimal getValorTotal() {
+    public Money getValorTotal() {
         return valorTotal;
     }
 
-    public boolean verificarValor(BigDecimal valorTotal) {
-        BigDecimal valorPraComparacao = valorTotal;
-
-        if (valorPraComparacao.compareTo(BigDecimal.ZERO) == 0 || valorPraComparacao.compareTo(BigDecimal.ZERO) < 0) {
+    public boolean verificarValorTotal() {
+        if (this.valorTotal.getValor().compareTo(BigDecimal.ZERO) == 0 || this.valorTotal.getValor().compareTo(BigDecimal.ZERO) < 0) {
             return false;   
         }
 
@@ -106,7 +116,7 @@ public class Pedido {
     }
 
     public void desconto(BigDecimal desconto){
-        atualizarValorTotal((this.valorTotal.multiply(desconto.divide(new BigDecimal("100")))).multiply(new BigDecimal("-1")));
+        subtrairNoValorTotal(this.valorTotal.multiplicar(desconto.divide(new BigDecimal("100"))));
     }
 
     public String getEstado(){
