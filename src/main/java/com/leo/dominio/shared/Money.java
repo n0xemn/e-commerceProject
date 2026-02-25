@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 
 public class Money {
     private final BigDecimal valor;
-    private final String moeda; // TODO mudar pra uma classe de moeda depois, criar equals
+    private final String moeda; // TODO mudar pra uma classe de moeda depois
 
     public Money(BigDecimal valor, String moeda){
         if (valor == null || valor.compareTo(BigDecimal.ZERO) == 0 || valor.compareTo(BigDecimal.ZERO) < 0) {
@@ -66,5 +66,19 @@ public class Money {
 
     public String getMoeda(){ // TODO mudar retorno 
         return this.moeda;
+    }
+
+    @Override
+    public boolean equals(Object e){
+        if(this == e){
+            return true;
+        }
+
+        if (e == null || this.getClass() != e.getClass()) {
+            return false;
+        }
+
+        Money comparar = (Money) e;
+        return this.valor.compareTo(comparar.getValor()) == 0 && this.moeda.equals(comparar.getMoeda());
     }
 }
