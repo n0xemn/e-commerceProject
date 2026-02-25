@@ -28,4 +28,6 @@ public class Produto {
     public Money getPreco() {
         return preco;
     }
+
+    //TODO fazer equals
 }
